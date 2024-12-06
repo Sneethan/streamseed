@@ -284,7 +284,6 @@ if __name__ == "__main__":
             )
             
             time_diff = abs((now - schedule_today).total_seconds() / 60)  # difference in minutes
-            log_info(f"Current time (Sydney): {now.strftime('%H:%M')}")
             
             # Check if we should run now
             if time_diff < 1 and now.strftime('%H:%M') == SCHEDULE_TIME:
