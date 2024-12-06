@@ -116,7 +116,7 @@ s3_client = session.client('s3',
 # Add scheduling configuration
 SYDNEY_TZ = pytz.timezone('Australia/Sydney')
 SCHEDULE_DAY = 'saturday'
-SCHEDULE_TIME = '10:00'  # 10:00 AM Sydney time
+SCHEDULE_TIME = '10:07'  # 10:07 AM Sydney time
 
 # Add minimum file size threshold (e.g., 1MB)
 MIN_FILE_SIZE = 1024 * 1024  # 1MB in bytes
@@ -265,26 +265,29 @@ if __name__ == "__main__":
         schedule.every().saturday.at(local_schedule_time).do(main)
     elif SCHEDULE_DAY.lower() == 'wednesday':
         schedule.every().wednesday.at(local_schedule_time).do(main)
-    # Add other days as needed
 
     log_info(f"Scheduler set for every {SCHEDULE_DAY} at {SCHEDULE_TIME} Sydney time (Local time: {local_schedule_time})")
-
-    # Add an immediate check to see if we're close to the scheduled time
-    now = datetime.datetime.now(SYDNEY_TZ)
-    schedule_today = now.replace(
-        hour=schedule_time_sydney.hour,
-        minute=schedule_time_sydney.minute,
-        second=0,
-        microsecond=0
-    )
-    
-    time_diff = abs((now - schedule_today).total_seconds() / 60)  # difference in minutes
-    log_info(f"Current time (Sydney): {now.strftime('%H:%M')}")
-    log_info(f"Minutes from scheduled time: {time_diff}")
 
     try:
         # Keep the script running
         while True:
+            # Update time information on each check
+            now = datetime.datetime.now(SYDNEY_TZ)
+            schedule_today = now.replace(
+                hour=schedule_time_sydney.hour,
+                minute=schedule_time_sydney.minute,
+                second=0,
+                microsecond=0
+            )
+            
+            time_diff = abs((now - schedule_today).total_seconds() / 60)  # difference in minutes
+            log_info(f"Current time (Sydney): {now.strftime('%H:%M')}")
+            
+            # Check if we should run now
+            if time_diff < 1 and now.strftime('%H:%M') == SCHEDULE_TIME:
+                log_info("Schedule time reached, running job now...")
+                main()
+            
             schedule.run_pending()
             time.sleep(60)  # Check schedule every minute
     except Exception as e:
