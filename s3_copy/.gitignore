@@ -1,0 +1,14 @@
+*.env
+.DS_Store
+
+*.log
+*.log.*
+*.log.*.*
+*.log.*.*.*
+
+*.env.example
+*.mp3
+*.mp4
+*.wav
+*.webm
+*.webp

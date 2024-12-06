@@ -44,6 +44,7 @@ load_dotenv()
 # Configuration
 STREAM_URL = "https://playerservices.streamtheworld.com/api/livestream-redirect/7LTNAAC.aac"
 OUTPUT_DIR = "recordings"
+<<<<<<< Updated upstream
 RECORDING_DURATION = 7200  # 2 hours (in seconds) (real time 7200)
 FFMPEG_PATH = r"ffmpeg.exe"
 
@@ -72,6 +73,22 @@ def check_ffmpeg_installed(ffmpeg_path: str) -> bool:
         return False
 
 
+=======
+RECORDING_DURATION = 120  # 2 hours (in seconds)
+BUCKET_NAME = os.getenv("BUCKET_NAME", "dnr")
+VULTR_HOSTNAME = os.getenv("VULTR_HOSTNAME")  # e.g., "ewr1.vultrobjects.com"
+AWS_ACCESS_KEY = os.getenv("AWS_ACCESS_KEY")
+AWS_SECRET_KEY = os.getenv("AWS_SECRET_KEY")
+
+# Updated S3 client configuration for Vultr
+session = boto3.session.Session()
+s3_client = session.client('s3',
+    region_name=VULTR_HOSTNAME.split('.')[0] if VULTR_HOSTNAME else None,
+    endpoint_url=f"https://{VULTR_HOSTNAME}" if VULTR_HOSTNAME else None,
+    aws_access_key_id=AWS_ACCESS_KEY,
+    aws_secret_access_key=AWS_SECRET_KEY
+)
+>>>>>>> Stashed changes
 
 def record_stream() -> Optional[str]:
     """Record the MP3 stream.
@@ -114,6 +131,7 @@ def record_stream() -> Optional[str]:
         log_error(f"Error during recording: {e}")
         return None
 
+<<<<<<< Updated upstream
 import time
 
 def upload_to_supabase(local_file: str, supabase_key: str) -> bool:
@@ -123,10 +141,16 @@ def upload_to_supabase(local_file: str, supabase_key: str) -> bool:
         local_file (str): Path to the local file.
         supabase_key (str): The destination key (file name) in Supabase storage.
 
+=======
+def upload_to_s3(local_file: str, s3_key: str) -> bool:
+    """Upload a file to Vultr Object Storage.
+    
+>>>>>>> Stashed changes
     Returns:
         bool: True if upload was successful, False otherwise.
     """
     try:
+<<<<<<< Updated upstream
         if not supabase_key.lower().endswith(".mp3"):
             log_error(f"Invalid file extension for {local_file}. Expected .mp3.")
             return False
@@ -156,6 +180,16 @@ def upload_to_supabase(local_file: str, supabase_key: str) -> bool:
             supabase.storage.from_("streamseed").upload(supabase_key, file)
 
         log_info(f"Uploaded {local_file} to Supabase as {supabase_key}")
+=======
+        with open(local_file, 'rb') as file:
+            s3_client.put_object(
+                Bucket=BUCKET_NAME,
+                Key=s3_key,
+                Body=file,
+                ACL='public-read'
+            )
+        log_info(f"Uploaded {local_file} to Vultr Object Storage as {s3_key}")
+>>>>>>> Stashed changes
         return True
 
 
