@@ -5,9 +5,9 @@ const VULTR_HOSTNAME = 'sjc1.vultrobjects.com'; // Update this to match your con
 async function fetchArchiveFiles() {
     try {
         // Get the container element
-        const archiveContainer = document.getElementById('archive-container');
-        if (!archiveContainer) {
-            console.error('Archive container element not found');
+        const episodesContainer = document.getElementById('episodes-container');
+        if (!episodesContainer) {
+            console.error('Episodes container element not found');
             return;
         }
 
@@ -29,110 +29,70 @@ async function fetchArchiveFiles() {
         const contents = xmlDoc.getElementsByTagName('Contents');
         
         // Clear existing content
-        archiveContainer.innerHTML = '';
+        episodesContainer.innerHTML = '';
 
         // Create elements for each file
         Array.from(contents).forEach(item => {
             const key = item.getElementsByTagName('Key')[0].textContent;
             
-            // Only process files from the archive folder
-            if (key.startsWith('archive/')) {
+            // Only process MP3 files from the archive folder
+            if (key.startsWith('archive/') && key.endsWith('.mp3')) {
                 const lastModified = item.getElementsByTagName('LastModified')[0].textContent;
-                const size = item.getElementsByTagName('Size')[0].textContent;
-                
-                // Create card element
-                const card = document.createElement('div');
-                card.className = 'archive-card';
+                const fileUrl = `https://${BUCKET_NAME}.${VULTR_HOSTNAME}/${key}`;
                 
                 // Format the date
                 const date = new Date(lastModified);
                 const formattedDate = date.toLocaleDateString('en-AU', {
                     year: 'numeric',
                     month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
+                    day: 'numeric'
                 });
 
-                // Format the size in MB
-                const sizeInMB = (parseInt(size) / (1024 * 1024)).toFixed(2);
+                // Create card element
+                const cardCol = document.createElement('div');
+                cardCol.className = 'col-12 mb-4';
                 
-                // Create the download link
-                const fileUrl = `https://${BUCKET_NAME}.${VULTR_HOSTNAME}/${key}`;
+                // Format the title (remove 'archive/' and '.mp3')
+                const title = key.replace('archive/', '').replace('.mp3', '');
                 
                 // Set the card content
-                card.innerHTML = `
-                    <h3>${key.replace('archive/', '')}</h3>
-                    <p>Recorded: ${formattedDate}</p>
-                    <p>Size: ${sizeInMB} MB</p>
-                    <a href="${fileUrl}" download class="download-button">
-                        Download Recording
-                    </a>
+                cardCol.innerHTML = `
+                    <div class="card">
+                        <div class="card-body d-flex flex-column" style="border-radius: 25px; border: 3px solid var(--bs-primary);">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <h4 class="card-title mb-0" style="font-family: 'Helvetica Now Display'; font-weight: 900;">
+                                    ${title}
+                                </h4>
+                                <span class="text-muted" style="font-family: 'Helvetica Now Display';">
+                                    ${formattedDate}
+                                </span>
+                            </div>
+                            <audio controls style="width: 100%; border: 3px solid var(--bs-primary); border-radius: 25px;">
+                                <source src="${fileUrl}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                    </div>
                 `;
                 
-                archiveContainer.appendChild(card);
+                episodesContainer.appendChild(cardCol);
             }
         });
 
     } catch (error) {
         console.error('Error fetching archive files:', error);
-        const archiveContainer = document.getElementById('archive-container');
-        if (archiveContainer) {
-            archiveContainer.innerHTML = `
-                <div class="error-message">
-                    Failed to load archive files. Please try again later.
+        const episodesContainer = document.getElementById('episodes-container');
+        if (episodesContainer) {
+            episodesContainer.innerHTML = `
+                <div class="col-12">
+                    <div class="alert alert-danger" role="alert">
+                        Failed to load episodes. Please try again later.
+                    </div>
                 </div>
             `;
         }
     }
 }
-
-// Add some basic styles
-const styles = `
-    .archive-card {
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 16px;
-        margin: 16px;
-        background-color: #fff;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .archive-card h3 {
-        margin: 0 0 8px 0;
-        color: #333;
-    }
-
-    .archive-card p {
-        margin: 4px 0;
-        color: #666;
-    }
-
-    .download-button {
-        display: inline-block;
-        background-color: #007bff;
-        color: white;
-        padding: 8px 16px;
-        border-radius: 4px;
-        text-decoration: none;
-        margin-top: 8px;
-    }
-
-    .download-button:hover {
-        background-color: #0056b3;
-    }
-
-    .error-message {
-        color: #dc3545;
-        padding: 16px;
-        text-align: center;
-    }
-`;
-
-// Add styles to the document
-const styleSheet = document.createElement('style');
-styleSheet.textContent = styles;
-document.head.appendChild(styleSheet);
 
 // Call the function when the page loads
 document.addEventListener('DOMContentLoaded', fetchArchiveFiles);

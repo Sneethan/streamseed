@@ -1,0 +1,239 @@
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-f86646c76b8c017e78f2357f6f15741b.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-f86646c76b8c017e78f2357f6f15741b.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-af7e004e1930bd3901d03d76016a8f34.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-9169671efa6ca555976f66db844fab8f.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-c28ca01c43e47aac7e6ac0b2f6528dcf.ttf) format('truetype');
+	font-weight: 100;
+	font-style: normal;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-8190b557506fb63bf56558816952bbf0.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-8190b557506fb63bf56558816952bbf0.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-6f4ec0f4d06f660ec3f7f3a7674b2a4b.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-4edc5a278efbfe9dfab399ac9a2d6626.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-047e535a167c7f808d9d79eddcbb70f4.ttf) format('truetype');
+	font-weight: 100;
+	font-style: normal;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-4ce28d3d6147d72b7566892498cd4995.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-4ce28d3d6147d72b7566892498cd4995.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-a688330b670c9efba448c9bb6228512c.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-79205f1b030fe2604d46c4b9070d9fe9.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-858f4f65b8d2a465c85c4956b0e31676.ttf) format('truetype');
+	font-weight: 100;
+	font-style: italic;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-84427f191965b6e5e71afb771666d228.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-84427f191965b6e5e71afb771666d228.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-039ee86e73c838231834201628f0de92.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-cb5b9ad83fa7f62f9addda295f122ac6.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-52ca6671046f52e4cc0f49d8fcfd9b7f.ttf) format('truetype');
+	font-weight: 100;
+	font-style: italic;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-d198189641010ec27e45e97af5e05add.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-d198189641010ec27e45e97af5e05add.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-fe8d7b21022f73997dfeef6df18acd60.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-ac88f1c58a476f5a792b2efe7b3a6c42.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-66e5f0c1098c1ca1b9beb9bc509adc45.ttf) format('truetype');
+	font-weight: 300;
+	font-style: normal;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-5a1b0014b18b081e6d45be1bbe647abd.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-5a1b0014b18b081e6d45be1bbe647abd.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-dc94bb20644c6560355fed65582bd6d2.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-65862cfb578260a4281f972e34e5139b.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-4a34a6179df88a978f9b72ce276f2f76.ttf) format('truetype');
+	font-weight: 300;
+	font-style: normal;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-b6b31521888be141c723988fe36c342b.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-b6b31521888be141c723988fe36c342b.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-00c9aa3711ae76d68663905f3cdb20f8.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-2069753ecf3b82c68167ef37dccdbf96.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-bee6a9e585a790fb9539717b1e36a487.ttf) format('truetype');
+	font-weight: 300;
+	font-style: italic;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-b28b9133eeaba54566500ec2d0fb1e7c.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-b28b9133eeaba54566500ec2d0fb1e7c.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-9f4cc5baa9e6dbbb76617ce5026b259e.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-a3bd018cfd2bacf38877a9556414bd0c.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-c24596c05b1641ac0a2caf61a7b11d5a.ttf) format('truetype');
+	font-weight: 300;
+	font-style: italic;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-d97f91d533034703c915603e7c76e5c3.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-d97f91d533034703c915603e7c76e5c3.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-00875853f781f017d0994b166d159feb.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-e0eae7425cb59f745e9627a7b90941a1.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-04dd44bc30c50df12db7aaa2dfb5b1e9.ttf) format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-361c85b42d6481b9c979d4661dd85dc5.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-361c85b42d6481b9c979d4661dd85dc5.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-399b5eccaac1cd90c2a5d72767d18321.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-5018d8ff09da53824cfecdc20bc5bfc4.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-c30803cc46682aee0f010f33d44e2837.ttf) format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-33dc853e12e668d2148d5fc108c74c5f.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-33dc853e12e668d2148d5fc108c74c5f.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-66efc0549ea66a2d55d9baa60c85d96e.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-ce62c8cfb9bca5b40c2c31bb679fcd2d.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-c1d590091d6731320386274eda7a340a.ttf) format('truetype');
+	font-weight: normal;
+	font-style: italic;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-a56c736a8f6e2a4e609c5a5c93fa422f.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-a56c736a8f6e2a4e609c5a5c93fa422f.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-8a7a2f0388bddefdc29f8e8473424763.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-219811a18a707bdb75defe8e5b1c479c.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-08b92a8b2f3aac0cad52713696c26fb3.ttf) format('truetype');
+	font-weight: normal;
+	font-style: italic;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-22ab2b23badd0e54cbc3db33eda9ea28.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-22ab2b23badd0e54cbc3db33eda9ea28.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-7d77484313ccefcb071182dd4237b82f.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-3e6cd23675e6bed94033ee3c94c02ec3.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-e7542e1548850a9e1dfe9b53805da43d.ttf) format('truetype');
+	font-weight: 500;
+	font-style: normal;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-4de665e9233fae067b852f521fc4afb5.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-4de665e9233fae067b852f521fc4afb5.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-81b890b77a5c89a91b74c196d6f578a3.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-b58efbdcc9ddbfdd8d9871750de1abde.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-f78c6bad2a716fc285a113b84d1106f7.ttf) format('truetype');
+	font-weight: 500;
+	font-style: italic;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-1c5c656927ee6dca24964196c6088ec3.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-1c5c656927ee6dca24964196c6088ec3.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-3dd5d19736f4524e14d5dfa77c7bcca3.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-508fe7f42cb943433178676003b46f9f.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-3201968c19de9425adb9fe45e5fc1361.ttf) format('truetype');
+	font-weight: bold;
+	font-style: normal;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-61ab12fff834335f5c5b18bbacf8dc52.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-61ab12fff834335f5c5b18bbacf8dc52.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-21076acbb6df33f77419041e7e3d227f.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-a82e6af4105cd97888827348cc52d85e.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-b3073ca8b86d7c74950396656d602161.ttf) format('truetype');
+	font-weight: bold;
+	font-style: italic;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-2706b6c0a81d3ede9881d5122419fb65.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-2706b6c0a81d3ede9881d5122419fb65.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-6f67c495a5fa9701542f6a2da4c11f56.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-27f210bd00136754da9fd47077eb6e46.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-b43b939882ec403057eb31fb6b42d32b.ttf) format('truetype');
+	font-weight: 800;
+	font-style: normal;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-b534c2d528189b1d497e05e18ce10d12.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-b534c2d528189b1d497e05e18ce10d12.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-e5ed585ae850c7fce667e083ca591c96.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-487374123dff977fa9b902d5601442bc.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-a6acd2b4d1a668069459f477239ba74d.ttf) format('truetype');
+	font-weight: 800;
+	font-style: italic;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-e5b5151a7e0ada4c9903ba3cffbd9093.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-e5b5151a7e0ada4c9903ba3cffbd9093.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-fadd2bbab1be0ae87ce0ba433f4fbafe.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-2b4cdf461559a7778040de1cb3f4a35b.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-38777550e0142f6c2e1c39c0a87a8389.ttf) format('truetype');
+	font-weight: 900;
+	font-style: normal;
+	font-display: auto;
+}
+
+@font-face {
+	font-family: 'Helvetica Now Display';
+	src: url(../../assets/fonts/Helvetica%20Now%20Display-33a9e43d13a06c31f05de5fdae78eab6.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-33a9e43d13a06c31f05de5fdae78eab6.eot) format('embedded-opentype'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-ddcc2bcc31c1fd66aa311123d9a3d53c.woff2) format('woff2'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-8f5c034a9ddaf99e341ccb464ad0d8c3.woff) format('woff'),
+	url(../../assets/fonts/Helvetica%20Now%20Display-5703deb2f9a8ddac072aa8a6137c3128.ttf) format('truetype');
+	font-weight: 900;
+	font-style: italic;
+	font-display: auto;
+}
