@@ -113,10 +113,9 @@ s3_client = session.client('s3',
     aws_secret_access_key=AWS_SECRET_KEY
 )
 
-# Add scheduling configuration
+# Update scheduling configuration - remove SCHEDULE_DAY since we only run on Wednesday
 SYDNEY_TZ = pytz.timezone('Australia/Sydney')
-SCHEDULE_DAY = 'wednesday'
-SCHEDULE_TIME = '22:00'  # 10:07 AM Sydney time
+SCHEDULE_TIME = '22:00'  # 10:00 PM Sydney time
 
 # Add minimum file size threshold (e.g., 1MB)
 MIN_FILE_SIZE = 1024 * 1024  # 1MB in bytes
@@ -264,13 +263,10 @@ if __name__ == "__main__":
         microsecond=0
     )
 
-    # Schedule the job using Sydney time directly
-    if SCHEDULE_DAY.lower() == 'saturday':
-        schedule.every().saturday.at(SCHEDULE_TIME).do(main)
-    elif SCHEDULE_DAY.lower() == 'wednesday':
-        schedule.every().wednesday.at(SCHEDULE_TIME).do(main)
+    # Schedule only for Wednesday
+    schedule.every().wednesday.at(SCHEDULE_TIME).do(main)
 
-    log_info(f"Scheduler set for every {SCHEDULE_DAY} at {SCHEDULE_TIME} Sydney time")
+    log_info(f"Scheduler set for every Wednesday at {SCHEDULE_TIME} Sydney time")
 
     try:
         # Keep the script running
@@ -286,7 +282,7 @@ if __name__ == "__main__":
             time_diff = abs((now - schedule_today).total_seconds() / 60)  # difference in minutes
             
             # Check if we should run now
-            if time_diff < 1 and now.strftime('%H:%M') == SCHEDULE_TIME:
+            if time_diff < 1 and now.strftime('%H:%M') == SCHEDULE_TIME and now.strftime('%A').lower() == 'wednesday':
                 log_info("Schedule time reached, running job now...")
                 main()
             
