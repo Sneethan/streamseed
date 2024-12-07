@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 
-"""
+# Import colorama first for the ASCII art
+from colorama import Fore, Style, init
+init(autoreset=True)
+
+def print_banner():
+    """Print the StreamSeed ASCII banner."""
+    banner = f"""{Fore.CYAN}
    _____ _                             _____               _ 
   / ____| |                           / ____|             | |
  | (___ | |_ _ __ ___  __ _ _ __ ___ | (___   ___  ___  __| |
@@ -9,11 +15,11 @@
  |_____/ \__|_|  \___|\__,_|_| |_| |_|_____/ \___|\___|\__,_|
                                                              
                                                              
-                                                           
-                    --- By Sneethan and Joshua ---                                                           
+{Fore.GREEN}                    --- By Sneethan and Joshua ---{Style.RESET_ALL}
 """
+    print(banner)
 
-from colorama import Fore, Style, init
+# Rest of the imports
 import subprocess
 import datetime
 import os
@@ -29,8 +35,8 @@ from functools import wraps
 import sys
 import requests
 
-# Initialize colorama
-init(autoreset=True)
+# Print banner before setting up logging
+print_banner()
 
 # Setup logging
 logging.basicConfig(
@@ -331,6 +337,9 @@ def main():
             cleanup_local_file(recording_file)
 
 if __name__ == "__main__":
+    # Print banner on startup
+    print_banner()
+    
     # Register signal handlers
     signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)
