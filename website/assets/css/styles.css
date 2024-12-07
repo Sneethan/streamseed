@@ -2,3 +2,22 @@
   width: 80vw;
 }
 
+#episodes-container {
+  width: 80vw;
+}
+
+a {
+}
+
+a:hover {
+  color: var(--bs-primary-border-subtle);
+}
+
+.footer-links {
+  color: var(--bs-primary);
+}
+
+.footer-links:hover {
+  color: var(--bs-primary-text-emphasis);
+}
+

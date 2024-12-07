@@ -31,8 +31,15 @@ async function fetchArchiveFiles() {
         // Clear existing content
         episodesContainer.innerHTML = '';
 
+        // Convert contents to array and sort by LastModified date (newest first)
+        const sortedContents = Array.from(contents).sort((a, b) => {
+            const dateA = new Date(a.getElementsByTagName('LastModified')[0].textContent);
+            const dateB = new Date(b.getElementsByTagName('LastModified')[0].textContent);
+            return dateB - dateA; // Sort in descending order (newest first)
+        });
+
         // Create elements for each file
-        Array.from(contents).forEach(item => {
+        sortedContents.forEach(item => {
             const key = item.getElementsByTagName('Key')[0].textContent;
             
             // Only process MP3 files from the archive folder
@@ -57,8 +64,8 @@ async function fetchArchiveFiles() {
                 
                 // Set the card content
                 cardCol.innerHTML = `
-                    <div class="card">
-                        <div class="card-body d-flex flex-column" style="border-radius: 25px; border: 3px solid var(--bs-primary);">
+                    <div class="card" style="border: 0px;">
+                        <div class="card-body d-flex flex-column" style="border-radius: 35px; border: 3px solid var(--bs-primary);">
                             <div class="d-flex justify-content-between align-items-start mb-3">
                                 <h4 class="card-title mb-0" style="font-family: 'Helvetica Now Display'; font-weight: 900;">
                                     ${title}
