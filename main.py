@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
    _____ _                             _____               _ 
   / ____| |                           / ____|             | |
@@ -97,7 +99,7 @@ load_dotenv()
 
 # Configuration
 STREAM_URL = "https://14533.live.streamtheworld.com/7LTNAAC_SC"
-OUTPUT_DIR = "recordings"
+OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "recordings")
 RECORDING_DURATION = 7200  # 2 hours (in seconds)
 BUCKET_NAME = os.getenv("BUCKET_NAME", "dnr")
 VULTR_HOSTNAME = os.getenv("VULTR_HOSTNAME")  # e.g., "ewr1.vultrobjects.com"
@@ -223,8 +225,27 @@ def record_stream() -> Optional[str]:
         log_error(f"Error during recording: {e}")
         return None
 
+# Add executable check for ffmpeg
+def check_ffmpeg():
+    """Check if ffmpeg is installed and accessible."""
+    try:
+        result = subprocess.run(['ffmpeg', '-version'], 
+                              capture_output=True, 
+                              text=True)
+        if result.returncode != 0:
+            raise Exception("FFmpeg check failed")
+        return True
+    except Exception as e:
+        log_error(f"FFmpeg not found or not accessible: {e}")
+        return False
+
 def main():
     """Main function that handles recording and uploading."""
+    # Add FFmpeg check
+    if not check_ffmpeg():
+        log_error("FFmpeg is required but not found. Please install FFmpeg.")
+        return
+        
     log_info("Starting new recording session...")
     
     # Step 1: Record the stream
