@@ -6,7 +6,8 @@ init(autoreset=True)
 
 def print_banner():
     """Print the StreamSeed ASCII banner."""
-    banner = f"""{Fore.CYAN}   _____ _                             _____               _ 
+    banner = f"""
+{Fore.CYAN}   _____ _                             _____               _ 
   / ____| |                           / ____|             | |
  | (___ | |_ _ __ ___  __ _ _ __ ___ | (___   ___  ___  __| |
   \___ \| __| '__/ _ \/ _` | '_ ` _ \ \___ \ / _ \/ _ \/ _` |
@@ -14,7 +15,8 @@ def print_banner():
  |_____/ \__|_|  \___|\__,_|_| |_| |_|_____/ \___|\___|\__,_|
                                                              
                                                              
-{Fore.GREEN}                    --- By Sneethan and Joshua ---{Style.RESET_ALL}"""
+{Fore.GREEN}                    --- By Sneethan and Joshua ---{Style.RESET_ALL}
+"""
     print(banner)
 
 # Rest of the imports
