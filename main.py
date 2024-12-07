@@ -39,19 +39,26 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Add Discord configuration
-DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
-NOTIFICATION_LEVEL = os.getenv("NOTIFICATION_LEVEL", "error")  # 'all', 'error', or 'none'
+# Update Discord configuration with better defaults and validation
+DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL", "").strip()
+NOTIFICATION_LEVEL = os.getenv("NOTIFICATION_LEVEL", "error").lower()  # 'all', 'error', or 'none'
+DISCORD_TIMEOUT = 5  # seconds
 
 def send_discord_notification(
     message: str,
-    level: Literal["info", "error", "success"] = "info"
+    level: Literal["info", "error", "success"] = "info",
+    retry_count: int = 2
 ) -> bool:
-    """Send notification to Discord webhook."""
+    """
+    Send notification to Discord webhook with improved error handling and retries.
+    Returns True if notification was sent successfully, False otherwise.
+    """
+    # Early return if Discord notifications are disabled or webhook URL is not set
     if not DISCORD_WEBHOOK_URL or NOTIFICATION_LEVEL == "none":
         return False
     
-    if NOTIFICATION_LEVEL == "error" and level == "info":
+    # Check notification level filtering
+    if NOTIFICATION_LEVEL == "error" and level not in ["error", "success"]:
         return False
 
     colors = {
@@ -60,39 +67,90 @@ def send_discord_notification(
         "success": 3066993   # Green
     }
 
-    try:
-        payload = {
-            "embeds": [{
-                "title": f"StreamSeed {level.title()} Notification",
-                "description": message,
-                "color": colors[level],
-                "timestamp": datetime.datetime.utcnow().isoformat()
-            }]
-        }
-        
-        response = requests.post(
-            DISCORD_WEBHOOK_URL,
-            json=payload,
-            timeout=10
-        )
-        response.raise_for_status()
-        return True
-    except Exception as e:
-        log_error(f"Failed to send Discord notification: {e}")
-        return False
+    payload = {
+        "embeds": [{
+            "title": f"StreamSeed {level.title()} Notification",
+            "description": message,
+            "color": colors.get(level, colors["info"]),
+            "timestamp": datetime.datetime.utcnow().isoformat(),
+            "footer": {
+                "text": f"StreamSeed Bot • {level.title()}"
+            }
+        }]
+    }
 
-# Update the logging functions to include Discord notifications
+    for attempt in range(retry_count + 1):
+        try:
+            response = requests.post(
+                DISCORD_WEBHOOK_URL,
+                json=payload,
+                timeout=DISCORD_TIMEOUT
+            )
+            
+            if response.status_code == 429:  # Rate limited
+                retry_after = int(response.headers.get('Retry-After', 5))
+                if attempt < retry_count:
+                    time.sleep(retry_after)
+                    continue
+                    
+            response.raise_for_status()
+            return True
+
+        except requests.exceptions.Timeout:
+            if attempt == retry_count:
+                logger.error(f"Discord notification timed out after {DISCORD_TIMEOUT}s")
+            
+        except requests.exceptions.RequestException as e:
+            if attempt == retry_count:
+                logger.error(f"Failed to send Discord notification: {str(e)}")
+            
+        except Exception as e:
+            if attempt == retry_count:
+                logger.error(f"Unexpected error sending Discord notification: {str(e)}")
+            
+        if attempt < retry_count:
+            time.sleep(2 ** attempt)  # Exponential backoff
+    
+    return False
+
+# Update the logging functions with better formatting
+def format_log_message(message: str, level: str) -> str:
+    """Format log message with timestamp and level."""
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return f"[{timestamp}] {level.upper()}: {message}"
+
 def log_info(message: str):
-    logger.info(Fore.GREEN + message)
+    """Log info message with optional Discord notification."""
+    formatted_msg = format_log_message(message, "info")
+    logger.info(Fore.CYAN + formatted_msg)
     send_discord_notification(message, "info")
 
 def log_error(message: str):
-    logger.error(Fore.RED + message)
-    send_discord_notification(message, "error")
+    """Log error message with Discord notification."""
+    formatted_msg = format_log_message(message, "error")
+    logger.error(Fore.RED + formatted_msg)
+    send_discord_notification(message, "error", retry_count=3)  # More retries for errors
 
 def log_success(message: str):
-    logger.info(Fore.GREEN + message)
+    """Log success message with Discord notification."""
+    formatted_msg = format_log_message(message, "success")
+    logger.info(Fore.GREEN + formatted_msg)
     send_discord_notification(message, "success")
+
+# Add a function to test Discord notifications
+def test_discord_notification() -> bool:
+    """Test Discord webhook configuration."""
+    if not DISCORD_WEBHOOK_URL:
+        logger.warning("Discord webhook URL not configured")
+        return False
+        
+    test_message = "StreamSeed Discord notification test - If you see this, notifications are working!"
+    if send_discord_notification(test_message, "info"):
+        logger.info("Discord notification test successful")
+        return True
+    else:
+        logger.error("Discord notification test failed")
+        return False
 
 # Load environment variables
 load_dotenv()
@@ -241,6 +299,9 @@ def check_ffmpeg():
 
 def main():
     """Main function that handles recording and uploading."""
+    # Test Discord notifications on startup
+    test_discord_notification()
+    
     # Add FFmpeg check
     if not check_ffmpeg():
         log_error("FFmpeg is required but not found. Please install FFmpeg.")
