@@ -11,6 +11,13 @@ async function fetchArchiveFiles() {
             return;
         }
 
+        // Show loader
+        episodesContainer.innerHTML = `
+            <div class="col-12 d-flex justify-content-center align-items-center" style="min-height: 200px;">
+                <span class="loader"></span>
+            </div>
+        `;
+
         // Fetch the files from the bucket
         const response = await fetch(`https://${BUCKET_NAME}.${VULTR_HOSTNAME}/`, {
             method: 'GET',
@@ -28,7 +35,7 @@ async function fetchArchiveFiles() {
         // Get all Contents elements (files) from the XML
         const contents = xmlDoc.getElementsByTagName('Contents');
         
-        // Clear existing content
+        // Clear loader
         episodesContainer.innerHTML = '';
 
         // Convert contents to array and sort by LastModified date (newest first)
@@ -57,14 +64,14 @@ async function fetchArchiveFiles() {
 
                 // Create card element
                 const cardCol = document.createElement('div');
-                cardCol.className = 'col-12 mb-4';
+                cardCol.className = 'col-12 mb-4 d-flex justify-content-center';
                 
                 // Format the title (remove 'archive/' and '.mp3')
                 const title = key.replace('archive/', '').replace('.mp3', '');
                 
                 // Set the card content
                 cardCol.innerHTML = `
-                    <div class="card" style="border: 0px;">
+                    <div class="card" style="border: 0px; width: 100%;">
                         <div class="card-body d-flex flex-column" style="border-radius: 35px; border: 3px solid var(--bs-primary);">
                             <div class="d-flex justify-content-between align-items-start mb-3">
                                 <h4 class="card-title mb-0" style="font-family: 'Helvetica Now Display'; font-weight: 900;">
@@ -74,7 +81,7 @@ async function fetchArchiveFiles() {
                                     ${formattedDate}
                                 </span>
                             </div>
-                            <audio controls style="width: 100%; border: 3px solid var(--bs-primary); border-radius: 25px;">
+                            <audio controls preload="none" style="width: 100%; border-radius: 25px;">
                                 <source src="${fileUrl}" type="audio/mpeg">
                                 Your browser does not support the audio element.
                             </audio>

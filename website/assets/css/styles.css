@@ -4,6 +4,83 @@
 
 #episodes-container {
   width: 80vw;
+  margin: 0 auto;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid var(--bs-primary);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Base audio player styling */
+audio {
+  filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%);
+  width: 100%;
+  height: 40px;
+  border-radius: 25px;
+}
+
+/* Main panel background */
+audio::-webkit-media-controls-panel {
+  background-color: var(--bs-body-bg);
+  border-radius: 25px;
+  padding: 5px;
+}
+
+/* Play button */
+audio::-webkit-media-controls-play-button {
+  background-color: var(--bs-primary);
+  border-radius: 50%;
+  margin-left: 5px;
+}
+
+/* Time display */
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display {
+  color: var(--bs-primary);
+  font-family: 'Helvetica Now Display';
+}
+
+/* Timeline/progress bar */
+audio::-webkit-media-controls-timeline {
+  background-color: var(--bs-primary);
+  border-radius: 25px;
+  margin: 0 10px;
+}
+
+/* Volume slider */
+audio::-webkit-media-controls-volume-slider {
+  background-color: var(--bs-primary);
+  border-radius: 25px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* Volume control container */
+audio::-webkit-media-controls-volume-control-container {
+  border-radius: 25px;
+}
+
+/* Mute button */
+audio::-webkit-media-controls-mute-button {
+  background-color: var(--bs-primary);
+  border-radius: 50%;
+  margin-right: 5px;
 }
 
 a {
