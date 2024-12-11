@@ -333,6 +333,14 @@ def main():
             # Step 5: Cleanup local file after successful upload
             cleanup_local_file(recording_file)
 
+def get_utc_time_from_sydney(schedule_time):
+    current_date = datetime.datetime.now(SYDNEY_TZ).date()
+    sydney_time = datetime.datetime.strptime(schedule_time, '%H:%M')
+    sydney_time = datetime.datetime.combine(current_date, sydney_time.time())
+    sydney_time = SYDNEY_TZ.localize(sydney_time)
+    utc_time = sydney_time.astimezone(pytz.UTC)
+    return utc_time.strftime('%H:%M')
+
 if __name__ == "__main__":
     print_banner()
     
@@ -340,10 +348,7 @@ if __name__ == "__main__":
     signal.signal(signal.SIGTERM, signal_handler)
 
     # Convert SCHEDULE_TIME to UTC
-    sydney_time = datetime.datetime.strptime(SCHEDULE_TIME, '%H:%M')
-    sydney_time = SYDNEY_TZ.localize(sydney_time)
-    utc_time = sydney_time.astimezone(pytz.UTC)
-    utc_schedule_time = utc_time.strftime('%H:%M')
+    utc_schedule_time = get_utc_time_from_sydney(SCHEDULE_TIME)
 
     # Schedule using UTC time
     schedule.every().wednesday.at(utc_schedule_time).do(main)
