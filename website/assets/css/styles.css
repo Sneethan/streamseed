@@ -4,86 +4,15 @@
 
 #episodes-container {
   width: 80vw;
-  margin: 0 auto;
 }
 
-.loader {
-  width: 48px;
-  height: 48px;
-  border: 5px solid var(--bs-primary);
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
-}
-
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Base audio player styling */
-audio {
-  filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%);
-  width: 100%;
-  height: 40px;
+#nav-btn {
   border-radius: 25px;
-}
-
-/* Main panel background */
-audio::-webkit-media-controls-panel {
-  background-color: var(--bs-body-bg);
-  border-radius: 25px;
-  padding: 5px;
-}
-
-/* Play button */
-audio::-webkit-media-controls-play-button {
-  background-color: var(--bs-primary);
-  border-radius: 50%;
-  margin-left: 5px;
-}
-
-/* Time display */
-audio::-webkit-media-controls-current-time-display,
-audio::-webkit-media-controls-time-remaining-display {
-  color: var(--bs-primary);
+  border: 3px var(--bs-primary) solid;
+  color: aliceblue;
   font-family: 'Helvetica Now Display';
-}
-
-/* Timeline/progress bar */
-audio::-webkit-media-controls-timeline {
-  background-color: var(--bs-primary);
-  border-radius: 25px;
-  margin: 0 10px;
-}
-
-/* Volume slider */
-audio::-webkit-media-controls-volume-slider {
-  background-color: var(--bs-primary);
-  border-radius: 25px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-/* Volume control container */
-audio::-webkit-media-controls-volume-control-container {
-  border-radius: 25px;
-}
-
-/* Mute button */
-audio::-webkit-media-controls-mute-button {
-  background-color: var(--bs-primary);
-  border-radius: 50%;
-  margin-right: 5px;
-}
-
-a {
+  font-weight: 900;
+  -ms-flex-align: center;
 }
 
 a:hover {
@@ -96,5 +25,88 @@ a:hover {
 
 .footer-links:hover {
   color: var(--bs-primary-text-emphasis);
+}
+
+.nav-btn, #nav-btn {
+  color: rgb(222,226,230);
+  font-family: 'Helvetica Now Display';
+  font-weight: 900;
+  border-radius: 20px;
+  background: transparent;
+  border: 3px groove rgb(15,198,106);
+}
+
+/* Custom audio player styling */
+audio {
+    width: 100%;
+    border-radius: 25px;
+}
+
+/* Loading spinner for audio */
+.audio-container {
+    position: relative;
+    width: 100%;
+}
+
+.audio-container.loading::before {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    border: 3px solid var(--bs-secondary);
+    border-top: 3px solid var(--bs-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 2;
+}
+
+@keyframes spin {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Webkit (Chrome, Safari) specific styles for audio player */
+audio::-webkit-media-controls-panel {
+    background-color: var(--bs-body-bg);
+}
+
+audio::-webkit-media-controls-timeline {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-primary);
+    border-radius: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display {
+    color: var(--bs-body-color);
+}
+
+/* Chrome specific progress indicator */
+audio::-webkit-media-slider-container {
+    background-color: var(--bs-secondary);
+}
+
+audio::-webkit-slider-runnable-track {
+    background-color: var(--bs-secondary);
+}
+
+audio::-webkit-slider-thumb {
+    background-color: var(--bs-primary);
+}
+
+/* Firefox specific styles */
+audio::-moz-range-track {
+    background-color: var(--bs-secondary);
+    border-radius: 25px;
+}
+
+audio::-moz-range-progress {
+    background-color: var(--bs-primary);
+    border-radius: 25px;
 }
 

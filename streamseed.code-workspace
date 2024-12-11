@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../dnr_archiver/recordings"
+		}
+	],
+	"settings": {}
+}
